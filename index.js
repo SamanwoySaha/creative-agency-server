@@ -90,7 +90,7 @@ client.connect(err => {
     app.post('/addAdmin', (req, res) => {
         adminsCollection.insertOne(req.body)
             .then(result => {
-                console.log(result.insertedCount > 0)
+                res.send(result.insertedCount > 0)
             })
     })
 
