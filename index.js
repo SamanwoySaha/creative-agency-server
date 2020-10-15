@@ -28,42 +28,60 @@ client.connect(err => {
     app.get('/brands', (req, res) => {
         brandsCollection.find({})
             .toArray((err, documents) => {
-                res.send(documents);
+                if(!err){
+                    res.send(documents);
+                }
+                res.status(404).send('Error');
             })
     })
 
     app.get('/portfolio', (req, res) => {
         portfolioCollection.find({})
             .toArray((err, documents) => {
-                res.send(documents);
+                if(!err){
+                    res.send(documents);
+                }
+                res.status(404).send('Error');
             })
     })
 
     app.get('/services', (req, res) => {
         servicesCollection.find({})
             .toArray((err, documents) => {
-                res.send(documents);
+                if(!err){
+                    res.send(documents);
+                }
+                res.status(404).send('Error');
             })
     })
 
     app.get('/orders', (req, res) => {
         ordersCollection.find({})
             .toArray((err, documents) => {
-                res.send(documents);
+                if(!err) {
+                    res.send(documents);
+                }
+                res.status(404).send('Error');
             })
     })
 
     app.get('/reviews', (req, res) => {
         reviewsCollection.find({})
         .toArray((err, documents) => {
-            res.send(documents);
+            if(!err) {
+                res.send(documents);
+            }
+            res.status(404).send('Error');
         })
     })
 
     app.post('/ordersByEmail', (req, res) => {
         ordersCollection.find({ email: req.body.email })
             .toArray((err, documents) => {
-                res.send(documents);
+                if(!err){
+                    res.send(documents);
+                }
+                res.status(404).send('Error');
             })
     })
 
@@ -83,14 +101,20 @@ client.connect(err => {
 
         servicesCollection.insertOne({ title, description, icon })
             .then(result => {
-                res.send(result.insertedCount > 0);
+                if(result.insertedCount > 0){
+                    res.send(result.insertedCount > 0);
+                }
+                res.status(404).send('Error');
             })
     })
 
     app.post('/addAdmin', (req, res) => {
         adminsCollection.insertOne(req.body)
             .then(result => {
-                res.send(result.insertedCount > 0)
+                if(result.insertedCount > 0){
+                    res.send(result.insertedCount > 0)
+                }
+                res.status(404).send('Error');
             })
     })
 
@@ -109,21 +133,30 @@ client.connect(err => {
 
         ordersCollection.insertOne({ ...orderInfo, image })
             .then(result => {
-                res.send(result.insertedCount > 0);
+                if(result.insertedCount > 0) {
+                    res.send(result.insertedCount > 0);
+                }
+                res.status(404).send('Error');
             })
     })
 
     app.post('/isAdmin', (req, res) => {
         adminsCollection.find({ email: req.body.email })
             .toArray((err, documents) => {
-                res.send(documents.length > 0);
+                if(!err){
+                    res.send(documents.length > 0);
+                }
+                res.status(404).send('Error');
             })
     })
 
     app.post('/makeReview', (req, res) => {
         reviewsCollection.insertOne(req.body)
         .then(result => {
-            res.send(result.insertedCount > 0)
+            if(result.insertedCount > 0) {
+                res.send(result.insertedCount > 0)
+            }
+            res.status(404).send('Error');
         })
     })
 
@@ -134,7 +167,10 @@ client.connect(err => {
                 $set: { status: req.body.status }
             })
             .then(result => {
-                res.send(result.modifiedCount > 0);
+                if(result.modifiedCount > 0) {
+                    res.send(result.modifiedCount > 0);                 
+                }
+                res.status(404).send('Error');
             })
     })
 })
