@@ -39,5 +39,3 @@ A Full Stack Agency Service App which provides various services to users. It is 
 - dotenv
 - express fileupload
 - body parser
-
-## [Download Resume](https://drive.google.com/file/d/1sDs2G2lW3txrw5QsLxhjJ0xSHE5-ImWL/view?usp=sharing)
